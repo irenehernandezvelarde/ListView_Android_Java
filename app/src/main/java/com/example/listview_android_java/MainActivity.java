@@ -1,7 +1,9 @@
 package com.example.listview_android_java;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     // Model: Record (intents=puntuació, nom)
     class Record {
@@ -24,9 +29,14 @@ public class MainActivity extends AppCompatActivity {
             intents = _intents;
             nom = _nom;
         }
+        public int getIntents(){
+            return intents;
+        }
+
     }
     // Model = Taula de records: utilitzem ArrayList
     ArrayList<Record> records;
+
 
     // ArrayAdapter serà l'intermediari amb la ListView
     ArrayAdapter<Record> adapter;
@@ -44,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         listaPersonas.add("Isma");
         listaPersonas.add("Jordi");
         listaPersonas.add("Pablo");
-        listaPersonas.add("Alex");
+        listaPersonas.add("Alejandro");
         listaPersonas.add("Borja");
         listaPersonas.add("Erik");
         listaPersonas.add("David");
@@ -55,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicialitzem model
         records = new ArrayList<Record>();
+
         // Afegim alguns exemples
         records.add( new Record(33,"Manolo") );
         records.add( new Record(12,"Pepe") );
@@ -75,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) convertView.findViewById(R.id.nom)).setText(getItem(pos).nom);
                 ((TextView) convertView.findViewById(R.id.intents)).setText(Integer.toString(getItem(pos).intents));
 
-                //final ImageView personitas = findViewById(R.id.imagen);
                 int[] images = {R.drawable.hombre,R.drawable.mujer};
                 Random rand = new Random();
                 ImageView imagen = convertView.findViewById(R.id.imagen);
@@ -103,5 +113,16 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+        Button bu = (Button) findViewById(R.id.ordena);
+        bu.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                Collections.sort(records, Comparator.comparing(Record::getIntents).thenComparing(Record::getIntents));
+                // notificar l'adapter dels canvis al model
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
+
 }
