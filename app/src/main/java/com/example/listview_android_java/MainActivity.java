@@ -11,6 +11,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 // "Pintem" valors (també quan es refresca)
                 ((TextView) convertView.findViewById(R.id.nom)).setText(getItem(pos).nom);
                 ((TextView) convertView.findViewById(R.id.intents)).setText(Integer.toString(getItem(pos).intents));
+
+                //final ImageView personitas = findViewById(R.id.imagen);
+                int[] images = {R.drawable.hombre,R.drawable.mujer};
+                Random rand = new Random();
+                ImageView imagen = convertView.findViewById(R.id.imagen);
+                imagen.setImageResource(images[rand.nextInt(images.length)]);
                 return convertView;
             }
 
@@ -86,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 for (int i=0;i<15;i++) {
+
                     int random1 = (int) (Math.random()*15)+1;
                     int random2 = (int) (Math.random()*15);
                     records.add(new Record(random1, listaPersonas.get(random2)));
