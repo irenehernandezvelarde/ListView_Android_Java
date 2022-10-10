@@ -30,10 +30,27 @@ public class MainActivity extends AppCompatActivity {
     // ArrayAdapter serà l'intermediari amb la ListView
     ArrayAdapter<Record> adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ArrayList<String>listaPersonas = new ArrayList<String>();
+        listaPersonas.add("Irene");
+        listaPersonas.add("Rafa");
+        listaPersonas.add("Sergio");
+        listaPersonas.add("Edu");
+        listaPersonas.add("Isma");
+        listaPersonas.add("Jordi");
+        listaPersonas.add("Pablo");
+        listaPersonas.add("Alex");
+        listaPersonas.add("Borja");
+        listaPersonas.add("Erik");
+        listaPersonas.add("David");
+        listaPersonas.add("Marc");
+        listaPersonas.add("Albert");
+        listaPersonas.add("Ivan");
+        listaPersonas.add("Enric");
 
         // Inicialitzem model
         records = new ArrayList<Record>();
@@ -60,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
-
         // busquem la ListView i li endollem el ArrayAdapter
         ListView lv = (ListView) findViewById(R.id.recordsView);
         lv.setAdapter(adapter);
@@ -70,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i<500;i++) {
-                    records.add(new Record(100, "Anonymous"));
+
+                for (int i=0;i<15;i++) {
+                    int random1 = (int) (Math.random()*15)+1;
+                    int random2 = (int) (Math.random()*15);
+                    records.add(new Record(random1, listaPersonas.get(random2)));
                 }
                 // notificar l'adapter dels canvis al model
                 adapter.notifyDataSetChanged();
