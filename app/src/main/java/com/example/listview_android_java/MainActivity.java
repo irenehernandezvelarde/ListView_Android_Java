@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         listaPersonas.add("Isma");
         listaPersonas.add("Jordi");
         listaPersonas.add("Pablo");
-        listaPersonas.add("Alejandro");
+        listaPersonas.add("Jandro");
         listaPersonas.add("Borja");
         listaPersonas.add("Erik");
         listaPersonas.add("David");
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) convertView.findViewById(R.id.nom)).setText(getItem(pos).nom);
                 ((TextView) convertView.findViewById(R.id.intents)).setText(Integer.toString(getItem(pos).intents));
 
-                int[] images = {R.drawable.hombre,R.drawable.mujer};
+                int[] images = {R.drawable.hombre,R.drawable.mujer,R.drawable.hombre2,R.drawable.mujer2,R.drawable.hombre3,R.drawable.mujer3,R.drawable.hombre4,R.drawable.mujer4, R.drawable.hombre5};
                 Random rand = new Random();
                 ImageView imagen = convertView.findViewById(R.id.imagen);
                 imagen.setImageResource(images[rand.nextInt(images.length)]);
